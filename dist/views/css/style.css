@@ -31,7 +31,7 @@ form {
 /*added backface*/
 .mover {
   position: fixed;
-  /*width: 256px;*/
+  width: 256px;
   z-index: -1;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
