@@ -18,31 +18,22 @@
     * pizzeria.jpg was initially 2.5mb and this was reduced to a few hundred kb.
 1. Optimizations to views/js/main.js
   1. Reduced the number of pizzas randomly generated.
-      * The initial number was 200. When looking at my 1920 X 1080px monitor I could only see 8 columns and 4 rows (32 pizzas) at any given time. I changed the procedure to calculate the appropriate number of rows based on the screen height divided by the number of pixels allocated for each row.
+      * Reduced down to 15
   1.  Inside the load event I created variables to save the list of moving pizzas and the random pizza container.
     * These two items are being used repeatedly and each time they were being used, the javascript was having to go query the DOM to get the elements.
     * These two items aren't changing during the life of the web page so there is no need to request the same data multiple times.
   1. Changed the document getter from querySelectorAll to getElementsbyClassName which seems to be much more efficient.
-    * With the change above, this didn't make much of a difference, but why not have as many improvements as I can find?
   1. Inside the update positions function I made major modifications.
     1. Instead of requesting the list of items each time this function is called, the list of items is cached in the on document load function (as noted above).
     1. Instead of requesting the scrolltop value and dividing by 1250 each time running through the loop I made it it's own variable.
       * This prevents the javascript from requesting the value once for each pizza and dividing that number by 1250 for each pizza. (Originally it was looping 200 times per scrollbar move so 200 times to 1 time)
     1. There are only 5 different phases, so I changed the code to calculate the 5 phases once, and save those phases into an array, which should be easier to pull data out of.
       * The javascript was looping through the list of pizzas and calculating the phases for each item.
-    1. Rather than "infinitly" adding one to the frame variable and checking to see if the value % 10 === 0, I set the frame value to 0.
-    1. For every frame rendered the javascript was saving a time value into the times variable. The logAverageFrame function was using the time values to calculate the average render time of the last 10 frames. After calculating the average time I'm clearing out the list of times.
-      * I'm not using times for anything else, so it's better to not let this grow too large.
-    1.  Inside resizePizzas, the determineDx function was adjusted so that it was only called once.
-      * It was initially being called once per pizza. Each pizza is using the same image, and is thus the same size. Therefore there's no need to call this once per pizza. Call it once and apply the results to all the pizzas.
+    1.  Inside resizePizzas, the determineDx function was deleted
+      * It was initially being called once per pizza. Each pizza is using the same image, and is thus the same size. Therefore there's no need to call this once per pizza.
 1. Optimizations to views/css/style.css
   1. Added backface-visibility property to the .movers class.
     * This forces each randomly created pizza into it's own layer, which basically offloads it to the GPU.
-
-### Outside Resources
-* <a href="https://developers.google.com/speed/pagespeed/insights/">Pagespeed Insights</a>
-* <a href="https://github.com/udacity/fend-office-hours/tree/master/Web%20Optimization/Effective%20Optimizations%20for%2060%20FPS">Udacity Office Hours suggestions</a>
-* Udacity: Website Performance Optimization
 
 ##Project Description
 
