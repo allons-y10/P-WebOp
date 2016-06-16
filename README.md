@@ -1,7 +1,7 @@
 # Website Performance Optimization portfolio project
 
 ## Comments
-<a href="https://www.udacity.com/course/viewer#!/c-nd001/l-2735848561/m-2686388535">Rubric</a>
+[Rubric](https://www.udacity.com/course/viewer#!/c-nd001/l-2735848561/m-2686388535)
 
 ### Optimizations Made
 1. Optimizations to index.html
