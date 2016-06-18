@@ -426,13 +426,13 @@ var resizePizzas = function(size) {
   function changeSliderLabel(size) {
     switch (size) {
       case "1":
-        document.querySelectorAll("pizzaSize").innerHTML = "Small";
+        document.getElementById("pizzaSize").innerHTML = "Small";
         return;
       case "2":
-        document.querySelectorAll("pizzaSize").innerHTML = "Medium";
+        document.getElementById("pizzaSize").innerHTML = "Medium";
         return;
       case "3":
-        document.querySelectorAll("pizzaSize").innerHTML = "Large";
+        document.getElementById("pizzaSize").innerHTML = "Large";
         return;
       default:
         console.log("bug in changeSliderLabel");
@@ -571,10 +571,18 @@ window.addEventListener('scroll', updatePositions); //requestAnimationFrameScrol
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
+  //using innerHeight to calculate number of background pizzas painted based on screen size
+  var pCols = Math.ceil(window.innerWidth / s);
+        console.log(pCols);
+  var pRows = Math.ceil(window.innerHeight / s);
+        console.log(pRows);
+  var pizzaDelivery = pCols * pRows;
+        console.log(pizzaDelivery);
+        cols = pCols;
   //declared elem outside of loop
   var elem;
   //lowered number of pizzas being painted
-  for (var i = 0; i < 40; i++) {
+  for (var i = 0; i < pizzaDelivery; i++) {
     elem = document.createElement('img');
     elem.className = 'mover';
     elem.src = "images/pizza.png";
